@@ -1,0 +1,22 @@
+.. 	.___                 __         .__  .__   
+	|   | ____   _______/  |______  |  | |  |  
+ 	|   |/    \ /  ___/\   __\__  \ |  | |  |  
+	|   |   |  \\___ \  |  |  / __ \|  |_|  |__
+	|___|___|  /____  > |__| (____  /____/____/
+	         \/     \/            \/           
+	========================================================================
+
+Setup
+=====
+
+Install all dependencies from packages or from sources:
+	* sudo apt-get install python-pymodbus
+	* sudo apt-get install python-pyasn1 python-twisted-conch
+
+or from source:
+	* git clone git@github.com:bashwork/pymodbus.git
+	* cd pymodbus
+	* sudo python setup.py install
+	
+and in your workspace do a ::
+	catkin_make 
