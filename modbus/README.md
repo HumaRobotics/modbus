@@ -9,7 +9,7 @@ To communicate with the other modbus module, standardized ROS messages are used.
 
 The scripts have been developed and tested on Ubuntu 14.04 with ROS Indigo and Python 2.7.6
 
-## Dependecies
+## Dependencies
 
 This wrapper package is based on the pymodbus library developed by: Galen Collins
 [github: https://github.com/bashwork/pymodbus](github: https://github.com/bashwork/pymodbus)
