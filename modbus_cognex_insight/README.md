@@ -1,7 +1,7 @@
 modbus cognex insight
 =====================
 
-A bridge between a python modbus client and a Cognex In-Sight camera set as Modbus server.
+This package is a bridge between a python modbus client and a Cognex In-Sight camera as modbus server.
 A job test is present in this package to test it without a camera.
 
 This package includes:
@@ -24,7 +24,7 @@ This package includes:
 
 ## Running the ROS node / modbus client
 
-For starting a modbus client that connects to a modbus server on the cognex insight camera use the command below. 
+For starting a modbus client that connects to a modbus server on the cognex insight camera, use the command below. 
 Before running the node, replace the ip address with the address from your camera or simulator. Try first, if you are able to ping it and verify that the modbus server is activated.
 ```
 	$ rosrun modbus_wrapper modbus_client_insight7200.py _ip:="192.168.199" _sim:=True
@@ -46,7 +46,7 @@ However a key is needed to unlock the emulator software.
 The following instructions will help with this process : 
 [In-Sight® Key Generator](http://www.cognex.com/support/iskeygenerator.aspx)
 
-## Load the Job test file in In-Sight Explorer
+## Load the job test file in In-Sight Explorer
 
 * The job test to load is in <strong> /resources/Insight </strong>, its name is <strong> CognexInsight7200.job</strong>.
 
@@ -66,15 +66,15 @@ Set the <strong>Playback Folder [3]</strong> to modbus_wrapper\modbus_cognex_ins
 
 After setting up the filmstrip, click on <strong> the Online icon [1]</strong>.
 
-On the Image View interface click on the <strong> Play icon [2]</strong> so that the filmstrip is streamed.
+On the Image view interface click on the <strong> Play icon [2]</strong> so that the filmstrip is streamed.
 
 <img src="resources/images/Insight_3.png" alt="image description" height="700" width="1000"/>
 
-### Spreadsheet View
+### Spreadsheet view
 
 To create this test job, 4 inspections were done on the initial image.
 
-A <strong>job change system </strong> using the modbus package was put together thank to this package.
+A <strong>job change system </strong> using the modbus package was put together thanks to this package.
 
 The modbus package (here used as a client) send the job id (one of the 4 inspections) to the modbus server running on the emulator (or the real camera). 
 
@@ -84,7 +84,7 @@ Each time a job is selected, all the <strong>other jobs are deactivated</strong>
 
 The result is then sent to the ROS modbus client in an array:
 ```
-[CameraIsAlive, Job_ID, Pass/Fail, String containing a word , String containing the barcode]
+[CameraIsAlive, Job_ID, Pass/Fail, String containing some text , String containing the barcode]
 ```
 
 <img src="resources/images/Insight_3_spreadsheet.png" alt="image description" height="700" width="1000"/>

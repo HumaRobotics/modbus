@@ -19,8 +19,8 @@ This wrapper package is based on the pymodbus library developed by: Galen Collin
 In order to have all dependencies installed, you need to install Collin's pymodbus, as well as the
 twisted server implementation, his work is based on.
 ```
-	sudo apt-get install python-pymodbus
-	sudo apt-get install python-pyasn1 python-twisted-conch
+	$ sudo apt-get install python-pymodbus
+	$ sudo apt-get install python-pyasn1 python-twisted-conch
 ```
 
 ## Quickstart

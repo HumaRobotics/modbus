@@ -1,7 +1,7 @@
 modbus plc siemens
 ====================
 
-A bridge between a python modbus client and a Siemens PLC set as Modbus server.
+This pacakge is a bridge between a python modbus client and a Siemens PLC as modbus server.
 
 
 This package includes:
