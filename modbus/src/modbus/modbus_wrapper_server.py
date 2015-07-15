@@ -164,5 +164,37 @@ class ModbusWrapperServer():
             Closes the server
         """
         self.server.server_close()
+        self.server.shutdown()
+        
+    def waitForCoilOutput(self,address,timeout=2):
+        """
+            Blocks for the timeout in seconds (or forever) until the specified address becomes true. Adapt this to your needs
+            :param address: Address of the register that wanted to be read.
+            :type address: int
+            :param timeout: The time in seconds until the function should return latest.
+            :type: float/int
+        """
+        now = time.time()
+        while True:
+            values = self.store.getValues(1,address, 1)
+            if values[0] is True:
+                return True
+            else:
+                if timeout <=0 or now + timeout > time.time():
+                    time.sleep(1/50)
+                else:
+                    return False
+    
+    def setDigitalInput(self,address,values):
+        """
+            Writes to the digital input of the modbus server
+            :param address: Starting address of the values to write
+            :type: int
+            :param values: List of values to write
+            :type list/boolean/int
+        """
+        if not values is list:
+            values = [values]
+        self.store.setValues(2,address,values)
         
         

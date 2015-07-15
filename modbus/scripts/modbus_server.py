@@ -58,6 +58,20 @@ if __name__=="__main__":
     
     ###############
     # Example 1
+    # write to the Discrete Input
+    mws.setDigitalInput(0,1) # args: address , value. sets address to value
+    # Example 2
+    # read from clients coil output
+    print "waiting for line 0 to be set to True"
+    result = mws.waitForCoilOutput(0,5) # args: address,timeout in sec. timeout of 0 is infinite. waits until address is true
+    if result:
+        print "got line 0 is True from baxter"
+    else:
+        print "timeout waiting for signal on line 0"
+    
+    
+    ###############
+    # Example 3
     # Listen for the writeable modbus registers in any node
     def callback(msg):
         rospy.loginfo("Modbus register have been written: %s",str(msg.data))
@@ -67,7 +81,7 @@ if __name__=="__main__":
     
     
     ###############
-    # Example 2
+    # Example 4
     # Publisher to write first 20 modbus registers from any node
     pub = rospy.Publisher("modbus_server/write_to_registers",HoldingRegister,queue_size=500)
     rospy.sleep(1)
@@ -83,4 +97,5 @@ if __name__=="__main__":
         rospy.sleep(1)
     ################
     rospy.spin()
-    
+        
+    mws.stopServer()
