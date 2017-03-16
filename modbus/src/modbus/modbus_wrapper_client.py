@@ -75,6 +75,7 @@ class ModbusWrapperClient():
             self.client = ModbusTcpClient(host,port)
         except Exception, e:
             rospy.logwarn("Could not get a modbus connection to the host modbus. %s", str(e))
+            raise e
             return
         self.__rate = rate
         self.__reading_delay = 1/rate
@@ -178,6 +179,7 @@ class ModbusWrapperClient():
                     update = False 
             except Exception,e:
                 rospy.logwarn("Could not read holding register. %s", str(e))
+                raise e
                 rospy.sleep(2)
         
             if update:
@@ -186,6 +188,7 @@ class ModbusWrapperClient():
                         self.__pub.publish(self.__input)
                     except Exception,e:
                         rospy.logwarn("Could not publish message. Exception: %s",str(e))
+                        raise e
             rospy.Rate(self.__rate).sleep()
         self.listener_stopped = True
     
@@ -219,6 +222,7 @@ class ModbusWrapperClient():
                 self.output = values
             except Exception, e:
                 rospy.logwarn("Could not write values %s to address %d. Exception %s",str(values),address, str(e))
+                raise e
 
     def readRegisters(self,address=None,num_registers=None):
         """
@@ -239,6 +243,7 @@ class ModbusWrapperClient():
                 tmp = self.client.read_holding_registers(address,num_registers).registers
             except Exception, e:
                 rospy.logwarn("Could not read on address %d. Exception: %s",address,str(e))
+                raise e
             
             
             if self.__reset_registers:
@@ -246,6 +251,7 @@ class ModbusWrapperClient():
                     self.client.write_registers(address, [0 for i in xrange(num_registers)])
                 except Exception, e:
                     rospy.logwarn("Could not write to address %d. Exception: %s", address,str(e))
+                    raise e
             
         return tmp
     
