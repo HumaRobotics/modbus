@@ -47,10 +47,10 @@ class S7ModbusClient(ModbusWrapperClient):
             :param reset_registers: Defines if the holding registers should be reset to 0 after they have been read. Only possible if they are writeable
             :type reset_registers: bool
         """
-        print("Use the appropriate Step7 Project to enable the Modbus Server on your Siemens S1200 PLC")
+#         print("Use the appropriate Step7 Project to enable the Modbus Server on your Siemens S1200 PLC")
         ModbusWrapperClient.__init__(self,host,port,rate,reset_registers)
         self.setReadingRegisters(0,8)
-        self.setWritingRegisters(8,6)
+        self.setWritingRegisters(8,8)
         self.startListening()
         
         
