@@ -97,7 +97,7 @@ class ModbusWrapperClient():
         self.__mutex = Lock()
         
         self.__sub = rospy.Subscriber(sub_topic,HoldingRegister,self.__updateModbusOutput,queue_size=500)
-        self.__pub = rospy.Publisher(pub_topic,HoldingRegister,queue_size=500)
+        self.__pub = rospy.Publisher(pub_topic,HoldingRegister,queue_size=500, latch=True)
         
          
         
@@ -170,9 +170,10 @@ class ModbusWrapperClient():
                 if tmp is None:
                     rospy.sleep(2)
                     continue
-                
-                if set(tmp) != set(self.__input.data):
-                    
+                # rospy.logwarn("__updateModbusInput tmp is %s ", str(tmp))
+                # rospy.logwarn("__updateModbusInput self.__input.data is %s ", str(self.__input.data))
+
+                if tmp != self.__input.data:
                     update = True
                     self.__input.data = tmp
                 else:
