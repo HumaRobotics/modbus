@@ -166,18 +166,19 @@ class ModbusWrapperClient():
         update = True
         while not rospy.is_shutdown() and self.stop_listener is False:
             try: 
-                tmp =  self.readRegisters()
-                if tmp is None:
-                    rospy.sleep(2)
-                    continue
-                # rospy.logwarn("__updateModbusInput tmp is %s ", str(tmp))
-                # rospy.logwarn("__updateModbusInput self.__input.data is %s ", str(self.__input.data))
+                if not rospy.is_shutdown() :
+                    tmp =  self.readRegisters()
+                    if tmp is None:
+                        rospy.sleep(2)
+                        continue
+                    # rospy.logwarn("__updateModbusInput tmp is %s ", str(tmp))
+                    # rospy.logwarn("__updateModbusInput self.__input.data is %s ", str(self.__input.data))
 
-                if tmp != self.__input.data:
-                    update = True
-                    self.__input.data = tmp
-                else:
-                    update = False 
+                    if tmp != self.__input.data:
+                        update = True
+                        self.__input.data = tmp
+                    else:
+                        update = False 
             except Exception,e:
                 rospy.logwarn("Could not read holding register. %s", str(e))
                 raise e
@@ -218,9 +219,10 @@ class ModbusWrapperClient():
         """
         with self.__mutex:
             try:
-#                 print "writing address",address,"value"
-                self.client.write_registers(address, values)
-                self.output = values
+                if not rospy.is_shutdown() :
+    #                 print "writing address",address,"value"
+                    self.client.write_registers(address, values)
+                    self.output = values
             except Exception, e:
                 rospy.logwarn("Could not write values %s to address %d. Exception %s",str(values),address, str(e))
                 raise e

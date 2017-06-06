@@ -48,12 +48,12 @@ if __name__=="__main__":
     To see sent something to the modbus use a publisher on the topic /modbus_wrapper/output
     This file contains a sample publisher.
     """)
-    host = "192.168.0.199"
+    host = "192.168.0.198"
     port = 502
     if rospy.has_param("~ip"):
         host =  rospy.get_param("~ip")
     else:
-        rospy.loginfo("For not using the default IP %s, add an arg e.g.: '_ip:=\"192.168.0.199\"'",host)
+        rospy.loginfo("For not using the default IP %s, add an arg e.g.: '_ip:=\"192.168.0.198\"'",host)
     if rospy.has_param("~port"):
         port =  rospy.get_param("~port")
     else:
@@ -69,14 +69,14 @@ if __name__=="__main__":
     outputs2 = range(13,7,-1)
     #inputs = range(1,9) 
     
-    for i in xrange(5):
-        for output in outputs:    
-            modclient.setOutput(output,1,0.3)
-            rospy.sleep(0.1)
-        for output in outputs2:            
-            modclient.setOutput(output,1,0.3)
-            rospy.sleep(0.1)
-    rospy.sleep(0.3)
+    # for i in xrange(5):
+    #     for output in outputs:    
+    #         modclient.setOutput(output,1,0.3)
+    #         rospy.sleep(0.1)
+    #     for output in outputs2:            
+    #         modclient.setOutput(output,1,0.3)
+    #         rospy.sleep(0.1)
+    # rospy.sleep(0.3)
     #################
       
     #################
@@ -86,6 +86,7 @@ if __name__=="__main__":
     def showUpdatedRegisters(msg):
         rospy.loginfo("Modbus server registers have been updated: %s",str(msg.data))
     sub = rospy.Subscriber("modbus_wrapper/input",HoldingRegister,showUpdatedRegisters,queue_size=500)
+    rospy.spin()
     #################
     
      #################
@@ -107,7 +108,6 @@ if __name__=="__main__":
     #################
     
     rospy.loginfo("Outputs tests all done, just listening to inputs. Stop listening by pressing Ctrl+c")
-    rospy.spin()
     # Stops the listener on the modbus
     modclient.stopListening()
     
