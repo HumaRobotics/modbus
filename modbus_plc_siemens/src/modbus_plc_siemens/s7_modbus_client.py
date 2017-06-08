@@ -50,7 +50,7 @@ class S7ModbusClient(ModbusWrapperClient):
 #         print("Use the appropriate Step7 Project to enable the Modbus Server on your Siemens S1200 PLC")
         ModbusWrapperClient.__init__(self,host,port,rate,reset_registers)
         self.setReadingRegisters(0,8)
-        self.setWritingRegisters(8,8)
+        self.setWritingRegisters(8,9)
         #self.startListening()
         
         
